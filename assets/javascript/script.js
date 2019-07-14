@@ -67,4 +67,15 @@
     console.log(trainTime);
     console.log(trainFrequency);
 
+
+    var newRow = $("<tr>").append(
+        $("<td>").text(trainName),
+        $("<td>").text(trainDestination),
+        $("<td>").text(trainTime),
+        $("<td>").text(trainFrequency),
+      );
+
+      $("#train-table > tbody").append(newRow);
+
+
   });
