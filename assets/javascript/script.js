@@ -21,7 +21,7 @@
     // Grabs user input
     var trainName = $("#train-name-input").val().trim();
     var trainDestination = $("#destination-input").val().trim();
-    var trainTime = moment($z("#time-input").val().trim(), "HH:mm").format("X");
+    var trainTime = $("#time-input").val().trim();
     var trainFrequency = $("#frequency-input").val().trim();
   
     // Creates local "temporary" object for holding train data
@@ -33,7 +33,7 @@
     
     };
 
-    // Uploads employee data to the database
+    // Uploads train data to the database
     database.ref().push(newTrain);
   
     // Logs everything to console
@@ -51,4 +51,20 @@
     $("#frequency-input").val("");
 
       });
+  // 3. Create Firebase event for adding train to the database and a row in the html when a user adds an entry
+  database.ref().on("child_added", function(childSnapshot) {
+    console.log(childSnapshot.val());
   
+    // Store everything into a variable.
+    var trainName = childSnapshot.val().name;
+    var trainDestination = childSnapshot.val().destination;
+    var trainTime = childSnapshot.val().time;
+    var trainFrequency = childSnapshot.val().frequency;
+  
+    // Train Info
+    console.log(trainName);
+    console.log(trainDestination);
+    console.log(trainTime);
+    console.log(trainFrequency);
+
+  });
